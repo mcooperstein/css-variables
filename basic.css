@@ -1,3 +1,6 @@
+/* variable declarations */
+/* variables available throughout the app (Global Scope) */
+/* refers to the html tag, since that is the root of the document */
 :root{
   --beige: #dcdcc6;
   --red: #FF3232;
@@ -5,6 +8,12 @@
   --purple:#660066;
   --yellow:#ffff32;
 }
+
+.grid{
+  --columns: 250px 250px;
+}
+
+/* styles */
 
 body {
   background-color:var(--beige);
@@ -18,6 +27,8 @@ h1 {
 #navbar {
   padding:20px;
   font-size:24px;
+  /* variable --nav-blue only accessible in navbar local scope */
+  --nav-blue:navy;
 }
 
 #navbar>ul{
@@ -37,11 +48,12 @@ li{
 a{
   text-decoration: none;
   cursor:pointer;
+  color:var(--nav-blue);
 }
 
 .grid {
   display:grid;
-  grid-template-columns: 200px 200px;
+  grid-template-columns: var(--columns);
   grid-auto-rows: 140px;
   grid-gap: 50px;
   justify-content: center;
@@ -51,10 +63,12 @@ a{
   background-color:var(--red);
   padding:20px;
   border-radius:10px;
+  --blue: lightblue;
 }
 
 .item>h1{
-  color:var(--purple);
+  /* inherits blue from parent element "item" */
+  color:var(--blue);
 }
 
 button {
@@ -66,4 +80,25 @@ button {
   border-radius:5px;
   color:var(--blue);
   cursor:pointer;
+}
+
+/* overriding variables on hover */
+.item:hover{
+  --yellow:gold;
+  --red:red;
+}
+
+#green{
+  margin-top:20px;
+  color: green;
+  font-weight:bold;
+}
+
+@media all and (max-width:500px){
+  .grid{
+    --columns: 200px;
+  }
+  :root{
+    --beige: #ffeead;
+  }
 }
